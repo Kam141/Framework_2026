@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function About() {
   return (
     <div style={{ padding: "20px" }}>
@@ -6,6 +8,10 @@ export default function About() {
       <p><b>Nama Mahasiswa:</b> Kamila Habiba Putri Ananta</p>
       <p><b>NIM:</b> 2341720175</p>
       <p><b>Program Studi:</b> Teknologi Informasi</p>
+
+      <Link href="/">
+        <button>Kembali</button>
+      </Link>
     </div>
   );
 }
