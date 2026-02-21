@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 
 const ProdukDetail = () => {
-  const router = useRouter();
-//   const { id } = router.query;
-console.log(router);
+//   const router = useRouter();
+  const { query } = useRouter();
+// console.log(router);
 
   return (
     <div>
       <h1>Detail Produk</h1>
-      <p>Produk: </p>
+      <p>Produk:  {query.id}</p>
     </div>
   );
 };
