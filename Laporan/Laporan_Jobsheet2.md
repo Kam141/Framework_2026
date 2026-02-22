@@ -12,7 +12,7 @@
 
 ## Langkah 1. Persiapan Lingkungan
 Sebelum memulai project, dilakukan pengecekan versi perangkat lunak untuk memastikan lingkungan pengembangan siap digunakan.
-![Hasil Persiapan](media/Screenshot%202026-02-16%20175018.png)
+![Hasil Persiapan](media/praktikum_1/Screenshot%202026-02-16%20175018.png)
 
 ---
 
@@ -21,7 +21,7 @@ Project dibuat menggunakan perintah `npx create-next-app@13.4.7` untuk memastika
 * **Nama Project:** `my-app` 
 * **Konfigurasi:** Menggunakan `src/ directory` dan memilih **No** pada opsi App Router untuk menggunakan **Pages Router**
 
-![Hasil Praktikum](media/Screenshot%202026-02-16%20203710.png)
+![Hasil Praktikum](media/praktikum_1/Screenshot%202026-02-16%20203710.png)
 
 ---
 
@@ -30,7 +30,7 @@ Aplikasi dijalankan melalui terminal dengan perintah `npm run dev`
 * **Akses Lokal:** `http://localhost:3000` 
 
 **Hasil Tampilan Awal:**
-![Hasil Praktikum](media/Screenshot%202026-02-16%20203944.png)
+![Hasil Praktikum](media/praktikum_1/Screenshot%202026-02-16%20203944.png)
 
 
 ---
@@ -60,7 +60,7 @@ export default function Home() {
 }
 ``` 
 **Hasil Modifikasi:**
-![alt text](media/Screenshot%202026-02-16%20204903.png)
+![alt text](media/praktikum_1/Screenshot%202026-02-16%20204903.png)
 
 ---
 
@@ -68,27 +68,27 @@ export default function Home() {
 Mengubah file `api/hello.ts` untuk mengembalikan data JSON berupa nama dan alamat.
 
 **Hasil Output API:**
-![JSON Output](media/Screenshot%202026-02-16%20205218.png)
+![JSON Output](media/praktikum_1/Screenshot%202026-02-16%20205218.png)
 
-![JSON Output](media/Screenshot%202026-02-16%20205615.png)
+![JSON Output](media/praktikum_1/Screenshot%202026-02-16%20205615.png)
 
 
 ---
 
 ## 7. Modifikasi Background & Global Styles 
 Melakukan modifikasi pada file `_app.tsx` untuk mengatur tampilan global aplikasi[cite: 303, 308]. Dalam langkah ini, impor CSS global dinonaktifkan untuk melihat perubahan dasar.
-![Hasil Praktikum](media/Screenshot%202026-02-16%20205940.png)
+![Hasil Praktikum](media/praktikum_1/Screenshot%202026-02-16%20205940.png)
 
 ---
 
 ## Tugas Praktikum 
 ### Tugas 1: Membuat Halaman About 
 Membuat file `pages/about.js` yang menampilkan:
-![Hasil Praktikum](Media/Screenshot%202026-02-17%20205218.png)
+![Hasil Praktikum](Media/praktikum_1/Screenshot%202026-02-17%20205218.png)
 
 ### Tugas 2: Navigasi
 Menambahkan komponen `<Link>` dari Next.js pada halaman utama untuk memudahkan navigasi ke halaman About.
-![Hasil Praktikum](Media/Recording%202026-02-17%20211025.gif)
+![Hasil Praktikum](Media/praktikum_1/Recording%202026-02-17%20211025.gif)
 
 ---
 
