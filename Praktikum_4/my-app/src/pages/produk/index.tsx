@@ -11,6 +11,15 @@ const produk = () => {
   //   }
   // }, []);
 
+  useEffect(() => {
+    const isLogin = localStorage.getItem("isLogin");
+
+    if (!isLogin) {
+      push("/auth/login"); // Redirect otomatis
+    }
+  }, []);
+
+
   return (
     <div>Produk User Page</div>
   );

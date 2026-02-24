@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 const halamanLogin = () => {
   const {push} = useRouter();
   const handlerLogin = () => {
-    
+    localStorage.setItem("isLogin", "true");
     push("/produk");
   }
   return (
@@ -17,7 +17,7 @@ const halamanLogin = () => {
       {/* <button onClick={() => handlerLogin()}>Login</button> <br /> */}
 
       {/*Login ↔ Register (Link)  */}
-      <Link href="/auth/register">Ke Halaman Register</Link>
+      {/* <Link href="/auth/register">Ke Halaman Register</Link> */}
     </div>
   );
 };
