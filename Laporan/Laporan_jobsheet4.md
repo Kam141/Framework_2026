@@ -151,7 +151,7 @@ Membuat navigasi:
 
 ---
 
-## ⭐ Tugas 3 (Pengayaan)
+## Tugas 3 (Pengayaan)
 
 Menerapkan redirect otomatis ke login jika user belum login saat mengakses halaman product.
 
