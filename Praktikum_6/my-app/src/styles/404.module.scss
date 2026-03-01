@@ -34,3 +34,27 @@
   max-width: 520px;
   opacity: 0.9;
 }
+
+.error__button {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 10px;
+
+  background: #22c55e;
+  color: #0b1220;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.back {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
