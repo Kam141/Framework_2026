@@ -5,8 +5,32 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  padding: 24px;
+  gap: 12px;
+
+  /* custom warna + layout */
+  background: linear-gradient(135deg, #6137c3, #111827);
+  color: #e5e7eb;
+
+  /* custom font */
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
 }
 
 .error__image {
   width: 300px;
+}
+
+.error__title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.error__desc {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 520px;
+  opacity: 0.9;
 }
