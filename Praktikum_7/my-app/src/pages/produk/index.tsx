@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import styles from "./produk.module.css";
 
 type ProductType = {
   id: string;
@@ -15,37 +16,41 @@ const kategori = () => {
 
   const [products, setProducts] = useState<ProductType[]>([]);
 
-  // useEffect(() => {
-  //   if (!isLogin) {
-  //     push("/auth/login");
-  //   }
-  // }, []);
+  const fetchProducts = async () => {
+  try {
+    const response = await fetch("/api/produk");
+    const responsedata = await response.json();
+    setProducts(responsedata.data);
+  } catch (error) {
+    console.error("Error fetching produk:", error);
+  }
+};
 
   useEffect(() => {
-    fetch("/api/produk")
-      .then((response) => response.json())
-      .then((responsedata) => {
-        // console.log("Data produk:", responsedata.data);
-        setProducts(responsedata.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching produk:", error);
-      });
+    fetchProducts();
   }, []);
-
+  
   return (
-    <div>
-      <h1>Daftar Produk</h1>
-      {products.map((product) => (
-        <div key={product.id} style={{ marginBottom: 12 }}>
-          <h2>{product.name}</h2>
-          <p>Kategory: {product.category}</p>
-          <p>Harga: {product.price}</p>
-          <p>Ukuran: {product.size}</p>
-        </div>
-      ))}
+    <div className={styles.container}>
+      <h1 className={styles.title}>Daftar Produk</h1>
+
+      <button onClick={fetchProducts} className={styles.button}>
+        Refresh Data
+      </button>
+
+      <div className={styles.grid}>
+        {products.map((product) => (
+          <div key={product.id} className={styles.card}>
+            <h2 className={styles.productName}>{product.name}</h2>
+            <p>Kategori: {product.category}</p>
+            <p>Harga: Rp {product.price}</p>
+            <p>Ukuran: {product.size}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
+  
 };
 
 export default kategori;

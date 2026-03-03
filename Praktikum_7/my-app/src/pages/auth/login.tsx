@@ -1,6 +1,6 @@
 // import Link from "next/link";
 // import {useRouter} from "next/router";
-import TampilanLogin from "../../views/auth/login";
+import TampilanLogin from "@/pages/views/auth/login";
 
 const halamanLogin = () => {
   
