@@ -35,8 +35,8 @@ const kategori = () => {
   return (
     <div>
       <h1>Daftar Produk</h1>
-      {products.map((product: ProductType) => (
-        <div key={product.id}>
+      {products.map((product) => (
+        <div key={product.id} style={{ marginBottom: 12 }}>
           <h2>{product.name}</h2>
           <p>Harga: {product.price}</p>
           <p>Ukuran: {product.size}</p>

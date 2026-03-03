@@ -5,7 +5,7 @@ import { retrieveProducts } from "../utils/db/servicefirebase";
 type Data = {
   status: boolean;
   status_code: number;
-  data: any;
+  data: any[];
 };
 
 export default async function handler(
