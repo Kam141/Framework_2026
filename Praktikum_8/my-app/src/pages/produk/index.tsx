@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import  TampilanProduk from "@/pages/views/produk"
 import useSWR from "swr";
+import fetcher from "@/pages/utils/swr/fetcher";
 // import styles from "./produk.module.css";
 
 // type ProductType = {
@@ -12,7 +13,7 @@ import useSWR from "swr";
 //   price: number;
 // };
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+// const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const kategori = () => {
   // const [isLogin, setIsLogin] = useState(false);
