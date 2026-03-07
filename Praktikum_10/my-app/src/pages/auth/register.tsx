@@ -1,5 +1,5 @@
 import Link from "next/link";
-import TampilanRegister from "@/pages/views/auth/register";
+import TampilanRegister from "@/views/auth/register";
 
 const halamanRegister = () => {
   return (

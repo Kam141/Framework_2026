@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import  TampilanProduk from "@/pages/views/produk"
+import  TampilanProduk from "@/views/produk"
 import useSWR from "swr";
-import fetcher from "@/pages/utils/swr/fetcher";
+import fetcher from "@/utils/swr/fetcher";
 // import styles from "./produk.module.css";
 
 // type ProductType = {
