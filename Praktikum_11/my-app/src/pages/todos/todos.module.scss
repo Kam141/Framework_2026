@@ -1,0 +1,91 @@
+.todos {
+  padding: 40px;
+
+  &__title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+
+    &__item {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      }
+
+      &__title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      &__priority {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 6px;
+      }
+
+      &__status {
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+      }
+    }
+
+    &__skeleton {
+      width: 220px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+      &__title,
+      &__priority,
+      &__status {
+        background: #e5e5e5;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        animation: skeleton 1.2s infinite ease-in-out;
+      }
+
+      &__title {
+        height: 20px;
+        width: 80%;
+      }
+
+      &__priority {
+        height: 16px;
+        width: 60%;
+      }
+
+      &__status {
+        height: 16px;
+        width: 40%;
+      }
+    }
+  }
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
