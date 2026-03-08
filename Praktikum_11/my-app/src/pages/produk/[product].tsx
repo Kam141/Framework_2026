@@ -33,19 +33,58 @@ export default HalamanProduk;
 // Fungsi getServerSideProps akan dipanggil setiap kali halaman ini diakses,
 // dan akan mengambil data produk dari API sebelum merender halaman.
 // digunakan server-side rendering
-export async function getServerSideProps({
+
+// export async function getServerSideProps({
+//   params,
+// }: {
+//   params: { product: string };
+// }) {
+//   const res = await fetch(`http://localhost:3000/api/produk/${params?.product}`);
+//   const response = await res.json();
+
+//   // console.log("Data produk yang diambil dari API:", response);
+
+//   return {
+//     props: {
+//       product: response.data, // Pastikan memberikan nilai default jika data tidak tersedia
+//     },
+//   };
+// }
+
+// digunakan static-site generation
+export async function getStaticPaths() {
+  const res = await fetch("http://localhost:3000/api/produk");
+  const response = await res.json();
+
+  const paths = response.data.map((product: ProductType) => ({
+    params: { product: product.id },
+  }));
+
+  console.log("Paths yang dihasilkan untuk produk:", paths); // Debugging: tampilkan paths yang dihasilkan
+
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({
   params,
 }: {
   params: { product: string };
 }) {
-  const res = await fetch(`http://localhost:3000/api/produk/${params?.product}`);
-  const response = await res.json();
+  const res = await fetch(
+    `http://localhost:3000/api/produk/${params?.product}`
+  );
+
+  // const response: ProductType[] = await res.json();
+  const response: { data: ProductType[] } = await res.json();
 
   // console.log("Data produk yang diambil dari API:", response);
 
   return {
     props: {
-      product: response.data, // Pastikan memberikan nilai default jika data tidak tersedia
+      product: response.data,
     },
   };
 }
