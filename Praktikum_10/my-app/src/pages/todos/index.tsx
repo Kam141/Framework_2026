@@ -16,7 +16,7 @@ const list = () => {
   
   return (
     <div>
-      <TampilanList todos={isLoading ? [] : data} />
+      <TampilanList todos={isLoading ? [] : data?.data || []} />
     </div>
   );
   
