@@ -184,13 +184,37 @@ Pada tugas ini dibuat tiga jenis halaman dengan metode rendering berbeda.
 ### Halaman yang dibuat
 
 1. CSR (Client Side Rendering)
+![tugas](Media/Praktikum_10/tugas1_CSR.png)
+
 2. SSR (Server Side Rendering)
+![tugas](Media/Praktikum_10/tugas1_server.png)
+
 3. SSG (Static Site Generation)
+![tugas](Media/Praktikum_10/tugas1_static.png)
 
 ### Pengujian yang dilakukan
 
 1. Menambahkan data pada database
+
+    - CSR
+    ![tugas](Media/Praktikum_10/tugas2_CSR_tambah.png)
+
+    - SSR
+    ![tugas](Media/Praktikum_10/tugas2_SSR_tambah.png)
+
+    - SSG
+    ![tugas](Media/Praktikum_10/tugas2_SSG_tambah.png)
+
 2. Menghapus data pada database
+    - CSR
+    ![tugas](Media/Praktikum_10/tugas2_CSR_kurang.png)
+
+    - SSR
+    ![tugas](Media/Praktikum_10/tugas2_SSR_kurang.png)
+
+    - SSG
+    ![tugas](Media/Praktikum_10/tugas2_SSG_kurang.png)
+
 3. Membandingkan hasil perubahan data pada masing-masing metode rendering
 
 ### Hasil Pengujian
