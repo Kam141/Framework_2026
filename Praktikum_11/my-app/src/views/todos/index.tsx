@@ -1,4 +1,5 @@
 import styles from "@/pages/todos/todos.module.scss";
+import Link from "next/link";
 
 type TodoType = {
   id: string;
@@ -15,20 +16,24 @@ const TampilanTodos = ({ todos }: { todos: TodoType[] }) => {
       <div className={styles.todos__content}>
         {todos.length > 0 ? (
           <>
-            {todos.map((todo: TodoType) => (
-              <div key={todo.id} className={styles.todos__content__item}>
+            {todos.map((todos: TodoType) => (
+              <Link
+                href={`/todos/${todos.id}`}
+                key={todos.id}
+                className={styles.todos__content__item}
+              >
                 <h4 className={styles.todos__content__item__title}>
-                  {todo.title}
+                  {todos.title}
                 </h4>
 
                 <p className={styles.todos__content__item__priority}>
-                  Priority: {todo.priority}
+                  Priority: {todos.priority}
                 </p>
 
                 <p className={styles.todos__content__item__status}>
-                  Status: {todo.completed ? "Selesai" : "Belum selesai"}
+                  Status: {todos.completed ? "Selesai" : "Belum selesai"}
                 </p>
-              </div>
+              </Link>
             ))}
           </>
         ) : (

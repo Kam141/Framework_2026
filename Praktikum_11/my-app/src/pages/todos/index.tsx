@@ -12,7 +12,7 @@ const list = () => {
   const [todos, setTodos] = useState([]);
 
 
-  const {data, error, isLoading} = useSWR("/api/todos", fetcher);
+  const {data, error, isLoading} = useSWR("/api/todos/", fetcher);
   
   return (
     <div>
