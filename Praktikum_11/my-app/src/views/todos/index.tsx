@@ -1,12 +1,7 @@
 import styles from "@/pages/todos/todos.module.scss";
 import Link from "next/link";
 
-type TodoType = {
-  id: string;
-  title: string;
-  completed: boolean;
-  priority: string;
-};
+import { TodoType } from "@/types/todos.type";
 
 const TampilanTodos = ({ todos }: { todos: TodoType[] }) => {
   return (
@@ -23,7 +18,7 @@ const TampilanTodos = ({ todos }: { todos: TodoType[] }) => {
                 className={styles.todos__content__item}
               >
                 <h4 className={styles.todos__content__item__title}>
-                  {todos.title}
+                  {todos.name}
                 </h4>
 
                 <p className={styles.todos__content__item__priority}>

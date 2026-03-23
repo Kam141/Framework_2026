@@ -35,34 +35,82 @@ import { TodoType } from "@/types/todos.type";
 //   todos: TodoType | null;
 // };
 
-const HalamanTodo = ({ todos }: {todos: TodoType}) => {
-  if (!todos) {
-    return <div>Data todo tidak ditemukan</div>;
-  }
 
+// ssr
+// const HalamanTodo = ({ todos }: {todos: TodoType}) => {
+//   if (!todos) {
+//     return <div>Data todo tidak ditemukan</div>;
+//   }
+
+//   return (
+//     <div>
+//       <DetailTodo todos={todos} />
+//     </div>
+//   );
+// };
+
+// export default HalamanTodo;
+
+// export async function getServerSideProps({
+//   params,
+// }: {
+//   params: { todos: string };
+// }) {
+
+//   const res = await fetch(`http://localhost:3000/api/todos/${params?.todos}`);
+
+
+//     const response = await res.json();
+
+//     return {
+//       props: {
+//         todos: response.data?.[0], // Pastikan memberikan nilai default jika data tidak tersedia
+//       },
+//     };
+// }
+
+// static site generation
+// digunakan static-site generation
+
+const HalamanTodo = ({ todos }: { todos: TodoType }) => {
   return (
     <div>
-      <DetailTodo todos={todos} />
+      <DetailTodo data={todos} />
     </div>
   );
 };
 
 export default HalamanTodo;
 
-export async function getServerSideProps({
+export async function getStaticPaths() {
+  const res = await fetch("http://localhost:3000/api/todos");
+  const response = await res.json();
+  
+
+  const paths = response.data.map((todos: TodoType) => ({
+    params: { todos: todos.id },
+  }));
+
+  console.log("Paths yang dihasilkan untuk todo:", paths);
+  
+  console.log(response.data);
+  return {
+    paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({
   params,
 }: {
   params: { todos: string };
 }) {
+  const res = await fetch(`http://localhost:3000/api/todos/${params.todos}`);
+  const response: { data: TodoType } = await res.json();
 
-  const res = await fetch(`http://localhost:3000/api/todos/${params?.todos}`);
-
-
-    const response = await res.json();
-
-    return {
-      props: {
-        todos: response.data?.[0], // Pastikan memberikan nilai default jika data tidak tersedia
-      },
-    };
+  return {
+    props: {
+      todos: response.data,
+    },
+  };
 }

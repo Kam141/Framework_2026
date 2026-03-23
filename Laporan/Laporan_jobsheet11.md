@@ -100,10 +100,16 @@ Tampilan halaman detail produk SSG:
 
 
 ### Screenshot Halaman
-![Halaman Produk](images/produk-page.png)
+![Halaman Produk](Media/Praktikum_11/js%2011%20Tugas%20SSR.gif)
 
 ### Network Tab (CSR)
-![Network Tab](images/network-tab.png)
+![Network Tab](Media/Praktikum_11/js%2011%20CSR.gif)
+![Network Tab](Media/Praktikum_11/js%2011%20CSR.jpeg)
+
+### SSG
+## 🎥 Demo SSG
+
+[![Lihat Demo](Media/Praktikum_11/js%2011%20ssg.png)](https://drive.google.com/file/d/1Cw5m6-NC01p44SOv-IoKPJleuFs-tCTz/view?usp=sharing)
 
 
 ---
