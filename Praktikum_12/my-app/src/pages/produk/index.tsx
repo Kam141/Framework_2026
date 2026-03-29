@@ -15,7 +15,7 @@ import fetcher from "@/utils/swr/fetcher";
 
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const kategori = () => {
+const produk = () => {
   // const [isLogin, setIsLogin] = useState(false);
   // const { push } = useRouter();
 
@@ -35,10 +35,10 @@ const kategori = () => {
   
   return (
     <div>
-      <TampilanProduk products={isLoading ? [] : data?.data || []} />
+      <TampilanProduk products={isLoading ? [] : data?.data } />
     </div>
   );
   
 };
 
-export default kategori;
+export default produk;

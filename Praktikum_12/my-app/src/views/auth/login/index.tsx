@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 // import styles from "./login.module.css";
-import styles from "./login.module.scss";
+import styles from "@/views/auth/login/login.module.scss";
 
 const TampilanLogin = () => {
   const {push} = useRouter();

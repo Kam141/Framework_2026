@@ -52,12 +52,12 @@ export default HalamanProduk;
 // }
 
 // digunakan static-site generation
-export async function getStaticPaths() {
+export async function getStaticPaths( ) {
   const res = await fetch("http://localhost:3000/api/produk");
   const response = await res.json();
 
   const paths = response.data.map((product: ProductType) => ({
-    params: { product: product.id },
+    params: { id: String(product.id) },
   }));
 
   console.log("Paths yang dihasilkan untuk produk:", paths); // Debugging: tampilkan paths yang dihasilkan
@@ -71,10 +71,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({
   params,
 }: {
-  params: { product: string };
+  params: { id: string };
 }) {
   const res = await fetch(
-    `http://localhost:3000/api/produk/${params?.product}`
+    `http://localhost:3000/api/produk/${params?.id}`
   );
 
   // const response: ProductType[] = await res.json();
