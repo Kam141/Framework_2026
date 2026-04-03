@@ -17,6 +17,8 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   const email = formData.get("email") as string;
   const fullname = formData.get("Fullname") as string;
   const password = formData.get("Password") as string;
+  
+  
   const response = await fetch("/api/register", {
     method: "POST",
     headers: {
@@ -26,6 +28,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   });
   //  const result = await response.json();
   //  console.log(result);
+
   if (response.status === 200) {
     form.reset();
     // event.currentTarget.reset();
@@ -56,6 +59,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
               id="email"
               name="email"
               placeholder="Email"
+              required
               className={style.register__form__item__input}
             />
           </div>
@@ -88,6 +92,8 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
               id="Password"
               name="Password"
               placeholder="Password"
+              required
+              minLength={6}
               className={style.register__form__item__input}
             />
           </div>
