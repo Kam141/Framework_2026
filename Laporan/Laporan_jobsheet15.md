@@ -98,17 +98,23 @@ Membuat sistem register yang terhubung ke Firebase Firestore.
 * Password minimal 6 karakter
   → Untuk memastikan data valid dan aman
 
+<<<<<<< HEAD
   ![gambar](Media/Praktikum_15/js15_tugas2.gif)
 
+=======
+>>>>>>> 26b3e31c8426fa0d381d56aa4ac43220e32051a4
 ---
 
 ### 3. Role Default
 
 
 Setiap user otomatis memiliki role `"member"` saat registrasi.
+<<<<<<< HEAD
 ![gambar](Media/Praktikum_15/member.png)
 
 ![gambar](Media/Praktikum_15/js15_tugas3.gif)
+=======
+>>>>>>> 26b3e31c8426fa0d381d56aa4ac43220e32051a4
 
 ---
 
@@ -120,8 +126,11 @@ Menampilkan pesan error di halaman jika:
 * Email sudah digunakan
 * Input tidak valid
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 26b3e31c8426fa0d381d56aa4ac43220e32051a4
 ---
 
 ### 5. Screenshot Hasil
@@ -135,6 +144,7 @@ Menampilkan bukti:
 
 ---
 
+<<<<<<< HEAD
 # Jawaban Pertanyaan Analisis
 
 1. Mengapa password harus di-hash?
@@ -167,3 +177,60 @@ Menampilkan bukti:
    * member
 
 
+=======
+# ❓ F. Jawaban Pertanyaan Analisis
+
+### 1. Mengapa password harus di-hash?
+
+Password di-hash agar tidak tersimpan dalam bentuk asli (plaintext), sehingga lebih aman jika database bocor.
+
+---
+
+### 2. Perbedaan addDoc dan setDoc?
+
+* **addDoc** → otomatis membuat ID baru
+* **setDoc** → menggunakan ID yang kita tentukan sendiri
+
+---
+
+### 3. Mengapa perlu validasi method POST?
+
+Agar API hanya menerima request yang sesuai (POST), sehingga lebih aman dan tidak disalahgunakan.
+
+---
+
+### 4. Risiko jika email tidak dicek unik?
+
+* User bisa duplicate
+* Data tidak valid
+* Potensi bug pada sistem login
+
+---
+
+### 5. Fungsi role pada user?
+
+Untuk menentukan hak akses user, misalnya:
+
+* admin
+* member
+
+---
+
+# ✅ Kesimpulan
+
+Praktikum ini berhasil membuat sistem registrasi dengan:
+
+* Form input
+* API register
+* Validasi email unik
+* Hash password (bcrypt)
+* Penyimpanan ke Firestore
+* Error handling & loading
+
+---
+
+Kalau kamu mau, aku bisa bantu juga:
+✅ Dibuatkan versi **Word / PDF siap kumpul**
+✅ Ditambahkan **cover + daftar isi**
+✅ Disesuaikan dengan format kampus kamu (rapih banget)
+>>>>>>> 26b3e31c8426fa0d381d56aa4ac43220e32051a4
