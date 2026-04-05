@@ -2,6 +2,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { signIn } from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -39,33 +40,39 @@ export const authOptions: NextAuthOptions = {
         return null;
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
 
   callbacks: {
-    async jwt({ token, account, profile, user }: any) {
-      if (account?.provider === "credentials" && user) {
-        token.email = user.email;
-        token.fullname = user.fullname;
-        token.role = user.role;
-      }
-      // console.log("jwt callback", { token, account, profile, user })
-      return token;
-    },
+  async jwt({ token, account, profile, user }: any) {
+    if (account?.provider === "credentials" && user) {
+      token.email = user.email;
+      token.fullname = user.fullname;
+      token.role = user.role;
+    }
 
-    async session({ session, token }: any) {
-      if (token.email) {
-        session.user.email = token.email;
-      }
-      if (token.fullname) {
-        session.user.fullname = token.fullname;
-      }
-      if (token.role) {
-        session.user.role = token.role;
-      }
-      // console.log("session callback", { session, token })
-      return session;
-    },
+    if (account?.provider === "google") {
+      token.fullname = user.name;
+      token.email = user.email;
+      token.image = user.image;
+    }
+
+    return token;
   },
+
+  async session({ session, token }: any) {
+    session.user = {
+      email: token.email,
+      fullname: token.fullname,
+      image: token.image, 
+      role: token.role,
+    };
+    return session;
+  },
+}
 
 };
 export default NextAuth(authOptions);

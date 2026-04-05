@@ -60,7 +60,6 @@ const TampilanLogin = () => {
                 className={style.login__form__item__input}
               />
             </div>
-
             <div className={style.login__form__item}>
               <label
                 htmlFor="password"
@@ -76,13 +75,20 @@ const TampilanLogin = () => {
                 className={style.login__form__item__input}
               />
             </div>
-
             <button
               type="submit"
               className={style.login__form__item__button}
               disabled={isLoading}
             >
               {isLoading ? "Loading..." : "login"}
+            </button>
+            <br /> <br />
+            <button
+              onClick={() => signIn("google", { callbackUrl, redirect: false })}
+              className={style.login__form__item__button}
+              disabled={isLoading}
+            >
+              {isLoading ? "Loading..." : "sign in with google"}
             </button>
           </form>
           <br />
