@@ -174,25 +174,15 @@ Menambahkan login menggunakan GitHub sebagai alternatif selain Google.
 ---
 
 ## **4. Refactor Service**
-![Image](Media/Praktikum_17/img_google.png)
-
 Merapikan kode service agar reusable dan mudah digunakan kembali.
 
 ---
 
 ## **5. Optimasi Avatar dengan next/image**
-![Image](Media/Praktikum_17/img_google.png)
+![Image](Media/Praktikum_17/5_1.png)
+![Image](Media/Praktikum_17/5_2.png)
+![Image](Media/Praktikum_17/5_3.png)
 
 Menggunakan `next/image` untuk performa loading gambar yang lebih baik.
 
----
 
-# **KESIMPULAN**
-
-Praktikum ini berhasil:
-
-* Mengimplementasikan Google OAuth
-* Mengintegrasikan NextAuth.js
-* Menyimpan user ke Firebase
-* Menggunakan JWT & session
-* Menerapkan multi-role
