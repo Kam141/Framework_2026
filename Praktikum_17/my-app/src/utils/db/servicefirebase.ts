@@ -2,7 +2,6 @@ import {
   getFirestore,
   collection,
   getDocs,
-  Firestore,
   getDoc,
   doc,
   query,
@@ -12,6 +11,12 @@ import {
 } from "firebase/firestore";
 import app from "./firebase";
 import bcrypt from "bcrypt";
+
+export const ROLE = {
+  MEMBER: "member",
+  EDITOR: "editor",
+  ADMIN: "admin",
+};
 
 const db = getFirestore(app);
 
@@ -24,24 +29,25 @@ export async function retrieveProducts(collectionName: string) {
   return data;
 }
 
+
 export async function retrieveDataByID(collectionName: string, id: string) {
   const snapshot = await getDoc(doc(db, collectionName, id));
   const data = snapshot.data();
   return data;
 }
 
-
-export async function signIn(
-  email: string) {
+export async function signIn(email: string) {
   const q = query(collection(db, "users"), where("email", "==", email));
   const querySnapshot = await getDocs(q);
+
   const data = querySnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   }));
-  if (data) {
+
+  if (data.length > 0) {
     return data[0];
-  }else {
+  } else {
     return null;
   }
 }
@@ -59,24 +65,26 @@ export async function signUp(
     collection(db, "users"),
     where("email", "==", userData.email),
   );
+
   const querySnapshot = await getDocs(q);
+
   const data = querySnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   }));
-  // console.log("Query result:", data);
 
-  if (data.length >  0) {
-    // user belum ada -> boleh daftar
-    // await addDoc(collection(db, "users"), userData);
-    // console.log("User registered:", data);
+
+  if (data.length > 0) {
     callback({
-      status: "Error",
+      status: "error",
       message: "Email already exists",
     });
   } else {
+
     userData.password = await bcrypt.hash(userData.password, 10);
-    userData.role = "member";
+
+
+    userData.role = userData.role || ROLE.MEMBER;
 
     await addDoc(collection(db, "users"), userData)
       .then(() => {
@@ -90,7 +98,7 @@ export async function signUp(
           status: "error",
           message: error.message,
         });
-    });
+      });
   }
 }
 
@@ -102,24 +110,27 @@ export async function signInWithGoogle(userData: any, callback: any) {
     );
 
     const querySnapshot = await getDocs(q);
+
     const data: any = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
 
     if (data.length > 0) {
-      // User sudah ada, update data
       userData.role = data[0].role;
+
       await updateDoc(doc(db, "users", data[0].id), userData);
+
       callback({
         status: true,
-        message: "User registered and logged in with Google",
+        message: "User logged in with Google",
         data: userData,
       });
     } else {
-      // User baru, tambah data
-      userData.role = "member";
+      userData.role = ROLE.MEMBER;
+
       await addDoc(collection(db, "users"), userData);
+
       callback({
         status: true,
         message: "User registered and logged in with Google",
@@ -127,7 +138,6 @@ export async function signInWithGoogle(userData: any, callback: any) {
       });
     }
   } catch (error: any) {
-    // Tangani error di sini
     callback({
       status: false,
       message: "Failed to register user with Google",
