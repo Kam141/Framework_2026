@@ -3,6 +3,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { signIn } from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
+import { signInWithGoogle } from "@/utils/db/servicefirebase";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -47,32 +48,48 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-  async jwt({ token, account, profile, user }: any) {
-    if (account?.provider === "credentials" && user) {
-      token.email = user.email;
-      token.fullname = user.fullname;
-      token.role = user.role;
-    }
+    async jwt({ token, account, profile, user }: any) {
+      if (account?.provider === "credentials" && user) {
+        token.email = user.email;
+        token.fullname = user.fullname;
+        token.role = user.role;
+      }
 
-    if (account?.provider === "google") {
-      token.fullname = user.name;
-      token.email = user.email;
-      token.image = user.image;
-    }
+      // Jika login dengan Google, tambahkan informasi yang diperlukan ke token
+      if (account?.provider === "google") {
+        const data = {
+          fullname: user.name,
+          email: user.email,
+          image: user.image,
+          type: account.provider,
+        };
 
-    return token;
-  },
+        await signInWithGoogle(data, (result: any) => {
+          // Pastikan mengecek result.status sesuai dengan object yang dikirim
+          if (result.status) {
+            token.fullname = result.data.fullname;
+            token.email = result.data.email;
+            token.image = result.data.image;
+            token.type = result.data.type;
+            token.role = result.data.role;
+          }
+        });
+      }
 
-  async session({ session, token }: any) {
-    session.user = {
-      email: token.email,
-      fullname: token.fullname,
-      image: token.image, 
-      role: token.role,
-    };
-    return session;
-  },
-}
+
+      return token;
+    },
+
+    async session({ session, token }: any) {
+      session.user = {
+        email: token.email,
+        fullname: token.fullname,
+        image: token.image,
+        role: token.role,
+      };
+      return session;
+    },
+  }
 
 };
 export default NextAuth(authOptions);
