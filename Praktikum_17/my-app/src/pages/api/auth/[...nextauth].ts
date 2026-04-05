@@ -4,6 +4,7 @@ import { signIn } from "@/utils/db/servicefirebase";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
 import { signInWithGoogle } from "@/utils/db/servicefirebase";
+import GitHubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -45,6 +46,10 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
+    GitHubProvider({
+    clientId: process.env.GITHUB_ID!,
+    clientSecret: process.env.GITHUB_SECRET!,
+  }),
   ],
 
   callbacks: {
@@ -56,7 +61,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       // Jika login dengan Google, tambahkan informasi yang diperlukan ke token
-      if (account?.provider === "google") {
+      if (account?.provider === "google"  || account?.provider === "github") {
         const data = {
           fullname: user.name,
           email: user.email,

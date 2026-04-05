@@ -149,50 +149,39 @@ Untuk membedakan hak akses user (admin, member, dll).
 # **TUGAS MANDIRI**
 
 ## **1. Tambahkan Role Editor**
-
-### Penjelasan:
+![Image](Media/Praktikum_17/1_1.png)
+![Image](Media/Praktikum_17/1_2.png)
 
 Menambahkan role baru “editor” untuk akses tertentu dalam sistem.
 
-### Gambar:
-
-![Image](https://svg.template.creately.com/itwduopm)
-
-![Image](https://cdn.sanity.io/images/3jwyzebk/production/ab0d45a55f0c41a243093fb57d460fc366fed9ab-6336x3952.png)
-
-![Image](https://miro.medium.com/0%2AvuCGOHAdygFHwGwc.png)
-
-![Image](https://miro.medium.com/1%2Aub3g0nUC6NCkYPHoNB6rFw.png)
 
 ---
 
 ## **2. Halaman Khusus Editor**
-
-### Penjelasan:
+![Image](Media/Praktikum_17/halaman_editor.png)
 
 Membuat halaman yang hanya bisa diakses oleh user dengan role editor.
 
 ---
 
 ## **3. Tambahkan Provider GitHub**
-
-### Penjelasan:
+![Image](Media/Praktikum_17/3_1.png)
+![Image](Media/Praktikum_17/3_2.png)
+![Image](Media/Praktikum_17/js17_github.gif)
 
 Menambahkan login menggunakan GitHub sebagai alternatif selain Google.
 
 ---
 
 ## **4. Refactor Service**
-
-### Penjelasan:
+![Image](Media/Praktikum_17/img_google.png)
 
 Merapikan kode service agar reusable dan mudah digunakan kembali.
 
 ---
 
 ## **5. Optimasi Avatar dengan next/image**
-
-### Penjelasan:
+![Image](Media/Praktikum_17/img_google.png)
 
 Menggunakan `next/image` untuk performa loading gambar yang lebih baik.
 
