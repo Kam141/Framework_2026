@@ -2,7 +2,6 @@
 
 **Mata Kuliah:** Pemrograman Framework
 **Topik:** Optimasi Performa Aplikasi Menggunakan Next.js
-**Sumber:** 
 
 ---
 
