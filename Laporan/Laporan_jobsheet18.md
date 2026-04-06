@@ -83,29 +83,31 @@ Avatar dari Google perlu dikonfigurasi agar bisa di-load dan dioptimasi oleh Nex
 # TUGAS PRAKTIKUM
 
 ### 1. Optimasi semua image
-
+![Image](Media/Praktikum_18/optimasi_img_2.png)
+![Image](Media/Praktikum_18/optimasi_img.png)
 
 Menggunakan `next/image` agar lebih hemat bandwidth dan otomatis lazy loading.
 
 ### 2. Menggunakan font
-
+![Image](Media/Praktikum_18/font.png)
 Menggunakan minimal 1 font dari `next/font` untuk performa lebih baik.
 
 ### 3. Menambahkan Google Analytics
-
+![Image](Media/Praktikum_18/3_1.png)
+![Image](Media/Praktikum_18/3_2.png)
 Menggunakan `next/script` agar script tidak blocking.
 
 ### 4. Dynamic Import
-
+![Image](Media/Praktikum_18/4.png)
 Menggunakan `dynamic import` untuk lazy loading komponen.
 
 ### 5. Dokumentasi performa
-
+![Image](Media/Praktikum_18/5.png)
 Menggunakan Lighthouse untuk melihat peningkatan performa.
 
 ---
 
-# 💬 REFLEKSI & DISKUSI
+# REFLEKSI & DISKUSI
 
 ### 1. Mengapa `<img>` biasa tidak optimal?
 
@@ -126,4 +128,4 @@ Saat komponen tidak perlu dimuat di awal (lazy loading).
 
 ### 5. Dampak bundle size terhadap UX?
 
-Semakin besar bundle size, semakin lama loading → UX menurun.
+Semakin besar bundle size, semakin lama loading sehingga UX menurun.
