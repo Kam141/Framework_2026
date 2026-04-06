@@ -18,7 +18,7 @@ const roboto = Roboto({
 const AppShell = (props:AppShellProps) => {
   const { children } = props;
   const {pathname} = useRouter();
-  console.log(pathname);
+  // console.log(pathname);
   return (
   <main className={roboto.className}>
     {/* <Navbar /> */}
