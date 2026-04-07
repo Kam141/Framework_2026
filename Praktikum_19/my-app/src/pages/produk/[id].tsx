@@ -60,7 +60,7 @@ export async function getStaticPaths( ) {
     params: { id: String(product.id) },
   }));
 
-  console.log("Paths yang dihasilkan untuk produk:", paths); // Debugging: tampilkan paths yang dihasilkan
+  // console.log("Paths yang dihasilkan untuk produk:", paths); // Debugging: tampilkan paths yang dihasilkan
 
   return {
     paths,
