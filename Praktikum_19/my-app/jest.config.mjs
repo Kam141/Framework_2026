@@ -14,8 +14,9 @@ const config = {
   modulePaths: ['<rootDir>/src/'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^.+\\.module\\.(css|scss|sass)$': '<rootDir>/__mocks__/styleMock.js',
-    '^.+\\.(css|scss|sass)$': '<rootDir>/__mocks__/styleMock.js',
+    '^next-auth/jwt$': '<rootDir>/__mocks__/next-auth/jwt.js',
+    '^.+\.module\.(css|scss|sass)$': '<rootDir>/__mocks__/styleMock.js',
+    '^.+\.(css|scss|sass)$': '<rootDir>/__mocks__/styleMock.js',
   },
   transformIgnorePatterns: [
     '/node_modules/(?!(jose|next-auth|openid-client|uuid|@?firebase|firebase|swr|lodash-es|uuid))',

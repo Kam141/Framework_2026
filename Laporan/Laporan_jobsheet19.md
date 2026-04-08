@@ -138,7 +138,8 @@ Digunakan untuk mencegah error saat data belum tersedia.
 ![Image](Media/Praktikum_19/tugas_3.png)
 
 4. Gunakan mocking router
-Saya sudah melakukan mocking router pada praktikum
+
+   Saya sudah melakukan mocking router pada praktikum
 
 5. Dokumentasikan hasil
 
