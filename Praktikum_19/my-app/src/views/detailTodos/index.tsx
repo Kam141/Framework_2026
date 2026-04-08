@@ -11,7 +11,7 @@ const DetailTodo = ({ data }: { data: TodoType }) => {
           
           <h2 className={styles.tododetail_title}>{data.name}</h2>
 
-          <p className={styles.tododetail_priority}>
+          <p className={styles.tododetail_priority}>      
             Priority: {data.priority}
           </p>
 

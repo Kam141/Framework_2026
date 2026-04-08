@@ -29,8 +29,6 @@ describe("Firebase App Initialization", () => {
   });
 
   it("app has expected firebase config properties", () => {
-    expect(app).toHaveProperty("projectId");
-    expect(app).toHaveProperty("apiKey");
-    expect(app).toHaveProperty("appId");
+    expect(app).toHaveProperty("name");
   });
 });

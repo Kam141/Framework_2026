@@ -54,7 +54,7 @@ describe("TampilanLogin Component", () => {
 
   it("renders sign in with google button", () => {
     render(<TampilanLogin />);
-    expect(screen.getByText("sign in with google")).toBeInTheDocument();
+    expect(screen.getByText("Sign in with Google")).toBeInTheDocument();
   });
 
   it("renders sign in with github button", () => {

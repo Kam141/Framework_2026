@@ -1,0 +1,65 @@
+PASS src/_test_/pages/auth.register.spec.tsx
+  ● Console
+
+    console.log
+      calling push...
+
+      at log (src/views/auth/register/index.tsx:35:37)
+
+    console.log
+      push called!
+
+      at log (src/views/auth/register/index.tsx:37:37)
+
+PASS src/_test_/pages/server-pages.spec.tsx
+PASS src/_test_/pages/auth.page.spec.tsx
+---------------------------------|---------|----------|---------|---------|-------------------
+File                             | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+---------------------------------|---------|----------|---------|---------|-------------------
+All files                        |   24.68 |    15.21 |   12.24 |   22.79 |                   
+ src                             |       0 |      100 |       0 |       0 |                   
+  middleware.ts                  |       0 |      100 |       0 |       0 | 1-21              
+ src/components/layouts/AppShell |       0 |        0 |       0 |       0 |                   
+  index.tsx                      |       0 |        0 |       0 |       0 | 1-65              
+ src/components/layouts/footer   |       0 |      100 |       0 |       0 |                   
+  index.tsx                      |       0 |      100 |       0 |       0 | 1-9               
+ src/components/layouts/navbar   |       0 |        0 |       0 |       0 |                   
+  index.tsx                      |       0 |        0 |       0 |       0 | 1-55              
+ src/middleware                  |       0 |        0 |       0 |       0 |                   
+  withAuth.ts                    |       0 |        0 |       0 |       0 | 1-30              
+ src/pages                       |       0 |      100 |       0 |       0 |                   
+  404.tsx                        |       0 |      100 |       0 |       0 | 1-30              
+  _app.tsx                       |       0 |      100 |       0 |       0 | 1-8               
+  _document.tsx                  |       0 |      100 |       0 |       0 | 1-3               
+  index.tsx                      |       0 |      100 |       0 |       0 | 1-9               
+ src/pages/about                 |       0 |      100 |       0 |       0 |                   
+  index.tsx                      |       0 |      100 |       0 |       0 | 1-8               
+ src/pages/admin                 |       0 |      100 |       0 |       0 |                   
+  index.tsx                      |       0 |      100 |       0 |       0 | 1-18              
+ src/pages/auth                  |     100 |      100 |     100 |     100 |                   
+  login.tsx                      |     100 |      100 |     100 |     100 |                   
+  register.tsx                   |     100 |      100 |     100 |     100 |                   
+ src/pages/editor                |       0 |      100 |       0 |       0 |                   
+  index.tsx                      |       0 |      100 |       0 |       0 | 1-14              
+ src/pages/produk                |      60 |       40 |   28.57 |   64.51 |                   
+  [id].tsx                       |   70.37 |    66.66 |      25 |   86.66 | 42-43             
+  index.tsx                      |       0 |        0 |       0 |       0 | 2-25              
+  server.tsx                     |   88.88 |      100 |      50 |    87.5 | 6                 
+ src/pages/profile               |       0 |      100 |       0 |       0 |                   
+  index.tsx                      |       0 |      100 |       0 |       0 | 1-13              
+ src/pages/todos                 |   55.81 |       25 |   28.57 |      60 |                   
+  [todos].tsx                    |      64 |     37.5 |      25 |   78.57 | 6,40-41           
+  index.tsx                      |       0 |        0 |       0 |       0 | 2-25              
+  server.tsx                     |   88.88 |      100 |      50 |    87.5 | 6                 
+ src/utils/db                    |       0 |        0 |       0 |       0 |                   
+  firebase.ts                    |       0 |      100 |     100 |       0 | 1-14              
+  servicefirebase.ts             |       0 |        0 |       0 |       0 | 11-130            
+ src/utils/swr                   |       0 |      100 |       0 |       0 |                   
+  fetcher.ts                     |       0 |      100 |       0 |       0 | 1-3               
+---------------------------------|---------|----------|---------|---------|-------------------
+
+Test Suites: 3 passed, 3 total
+Tests:       16 passed, 16 total
+Snapshots:   0 total
+Time:        4.985 s
+Ran all test suites matching src/_test_/pages/auth.register.spec.tsx|src/_test_/pages/auth.page.spec.tsx|src/_test_/pages/server-pages.spec.tsx.

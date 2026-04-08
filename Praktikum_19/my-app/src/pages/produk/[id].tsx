@@ -1,90 +1,47 @@
-import fetcher from "@/utils/swr/fetcher";
-import { useRouter } from "next/router";
-import useSWR from "swr";
 import DetailProduk from "@/views/DetailProduk";
 import { ProductType } from "@/types/product.type";
+import { GetServerSideProps } from "next";
 
-const HalamanProduk = ({ product }: { product: ProductType }) => {
-  // digunakan client-side rendering
-  // const Router = useRouter();
-  // console.log(Router);
-
-  // const { query } = useRouter();
-  // const { data, error, isLoading } = useSWR(
-  //   `/api/products/${query.produk}`,
-  //   fetcher
-  // );
-
-  // return (
-  //   <div>
-  //     <DetailProduk products={isLoading ? [] : data.data} />
-  //   </div>
-  // );
-
+// Komponen utama tetap simpel karena data sudah di-fetch di server
+const HalamanProduk = ({ products }: { products: ProductType }) => {
   return (
     <div>
-      <DetailProduk products={product} />
+      {/* Pastikan prop yang dikirim ke DetailTodo sesuai dengan nama yang diharapkan di views */}
+      <DetailProduk products={products} />
     </div>
   );
 };
 
 export default HalamanProduk;
 
-// Fungsi getServerSideProps akan dipanggil setiap kali halaman ini diakses,
-// dan akan mengambil data produk dari API sebelum merender halaman.
-// digunakan server-side rendering
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  // Ambil parameter 'id' dari URL (sesuai nama file [id].tsx)
+  const id = params?.id;
 
-// export async function getServerSideProps({
-//   params,
-// }: {
-//   params: { product: string };
-// }) {
-//   const res = await fetch(`http://localhost:3000/api/produk/${params?.product}`);
-//   const response = await res.json();
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/id/${id}`);
+    const response = await res.json();
 
-//   // console.log("Data produk yang diambil dari API:", response);
+    // LOGIKA PERBAIKAN:
+    // Jika API mengembalikan array, kita ambil index ke-0 saja.
+    // Jika API langsung mengembalikan objek, gunakan response.data.
+    const dataDetail = Array.isArray(response.data) ? response.data[0] : response.data;
 
-//   return {
-//     props: {
-//       product: response.data, // Pastikan memberikan nilai default jika data tidak tersedia
-//     },
-//   };
-// }
+    if (!dataDetail) {
+      return {
+        notFound: true, // Menampilkan halaman 404 jika data kosong
+      };
+    }
 
-// digunakan static-site generation
-export async function getStaticPaths( ) {
-  const res = await fetch("http://localhost:3000/api/produk");
-  const response = await res.json();
-
-  const paths = response.data.map((product: ProductType) => ({
-    params: { id: String(product.id) },
-  }));
-
-  // console.log("Paths yang dihasilkan untuk produk:", paths); // Debugging: tampilkan paths yang dihasilkan
-
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const res = await fetch(
-    `http://localhost:3000/api/produk/${params?.id}`
-  );
-
-  // const response: ProductType[] = await res.json();
-  const response: { data: ProductType[] } = await res.json();
-
-  // console.log("Data produk yang diambil dari API:", response);
-
-  return {
-    props: {
-      product: response.data,
-    },
-  };
-}
+    return {
+      props: {
+        products: dataDetail, // Kirim satu objek saja ke komponen
+      },
+    };
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return {
+      notFound: true,
+    };
+  }
+};

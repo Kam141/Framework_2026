@@ -8,9 +8,10 @@ jest.mock("next/server", () => ({
   },
 }));
 
-jest.mock("@/middleware/withAuth", () =>
-  jest.fn((middleware: any, _matcher: string[]) => middleware)
-);
+jest.mock("../../middleware/withAuth", () => ({
+  __esModule: true,
+  default: jest.fn((middleware: any, _matcher: string[]) => middleware),
+}));
 
 jest.mock("next-auth/jwt", () => ({
   __esModule: true,

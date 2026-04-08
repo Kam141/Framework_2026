@@ -24,7 +24,11 @@ jest.mock("bcrypt", () => ({
   compare: jest.fn(),
 }));
 
-jest.mock("@/utils/db/servicefirebase");
+jest.mock("@/utils/db/servicefirebase", () => ({
+  __esModule: true,
+  retrieveProducts: jest.fn(),
+  retrieveDataByID: jest.fn(),
+}));
 
 import todosHandler from "@/pages/api/todos/[[...todos]]";
 import { retrieveProducts, retrieveDataByID } from "@/utils/db/servicefirebase";
@@ -45,19 +49,16 @@ describe("API /todos handler", () => {
 
   it("returns all todos when no ID given", async () => {
     const mockData = [
-      { id: "1", name: "Todo 1", priority: "High", completed: false },
-      { id: "2", name: "Todo 2", priority: "Low", completed: true },
-    ];
-    (retrieveProducts as jest.Mock).mockResolvedValue([
       { id: "1", title: "Test Todo 1" },
       { id: "2", title: "Test Todo 2" },
-    ] as any);
+    ];
+    jest.spyOn(servicefirebase, "retrieveProducts").mockResolvedValue(mockData as any);
     const req = { query: {} } as unknown as NextApiRequest;
     const res = mockRes();
 
     await todosHandler(req, res);
 
-    expect(retrieveProducts).toHaveBeenCalledWith("todos");
+    expect(servicefirebase.retrieveProducts).toHaveBeenCalledWith("todos");
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith(
       expect.objectContaining({ status: true, data: mockData })
@@ -65,13 +66,10 @@ describe("API /todos handler", () => {
   });
 
   it("returns single todo when ID given in query", async () => {
-    const mockItem = { id: "xyz", name: "Todo Detail", priority: "Medium", completed: false };
-    (retrieveDataByID as jest.Mock).mockResolvedValue({
-      id: "1",
-      title: "Test Todo 1",
-    } as any);
+    const mockItem = { id: "xyz", title: "Test Todo 1" };
+    jest.spyOn(servicefirebase, "retrieveDataByID").mockResolvedValue(mockItem as any);
     const req = {
-      query: { produk: ["todos", "xyz"] },
+      query: { todos: ["xyz"] },
     } as unknown as NextApiRequest;
     const res = mockRes();
 

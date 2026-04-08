@@ -24,11 +24,17 @@ jest.mock("bcrypt", () => ({
   compare: jest.fn(),
 }));
 
-jest.mock("@/utils/db/servicefirebase");
+jest.mock("@/utils/db/servicefirebase", () => ({
+  __esModule: true,
+  signUp: jest.fn(),
+}));
 
 import handler from "@/pages/api/register";
-import { signUp } from "@/utils/db/servicefirebase";
 import type { NextApiRequest, NextApiResponse } from "next";
+
+const { signUp } = jest.requireMock("@/utils/db/servicefirebase") as {
+  signUp: jest.Mock;
+};
 
 function mockRes() {
   const res: Partial<NextApiResponse> = {};

@@ -24,7 +24,11 @@
     compare: jest.fn(),
   }));
 
-  jest.mock("@/utils/db/servicefirebase");
+  jest.mock("@/utils/db/servicefirebase", () => ({
+    __esModule: true,
+    retrieveProducts: jest.fn(),
+    retrieveDataByID: jest.fn(),
+  }));
 
   import produkHandler from "@/pages/api/[[...produk]]";
   import { retrieveProducts, retrieveDataByID } from "@/utils/db/servicefirebase";
@@ -39,16 +43,15 @@
 
   describe("API /produk handler", () => {
     beforeEach(() => {
-      (retrieveProducts as jest.Mock).mockClear();
-      (retrieveDataByID as jest.Mock).mockClear();
+      jest.clearAllMocks();
     });
 
     it("returns all products when no ID given", async () => {
-      const mockData = [{ id: "1", name: "Baju" }];
-      (retrieveProducts as jest.Mock).mockResolvedValue([
+      const mockData = [
         { id: "1", name: "Baju Koko", price: 150000, category: "Pakaian" },
         { id: "2", name: "Celana Panjang", price: 200000, category: "Pakaian" },
-      ] as any);
+      ];
+      (retrieveProducts as jest.Mock).mockResolvedValue(mockData as any);
       const req = { query: { produk: [] } } as unknown as NextApiRequest;
       const res = mockRes();
 
@@ -62,13 +65,13 @@
     });
 
     it("returns single product when ID given in query", async () => {
-      const mockItem = { id: "abc", name: "Celana" };
-      (retrieveDataByID as jest.Mock).mockResolvedValue({
-        id: "1",
-        name: "Baju Koko",
+      const mockItem = {
+        id: "abc",
+        name: "Celana",
         price: 150000,
         category: "Pakaian",
-      } as any);
+      };
+      (retrieveDataByID as jest.Mock).mockResolvedValue(mockItem as any);
       const req = {
         query: { produk: ["produk", "abc"] },
       } as unknown as NextApiRequest;

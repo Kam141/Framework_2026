@@ -1,78 +1,12 @@
-import fetcher from "@/utils/swr/fetcher";
-import { useRouter } from "next/router";
-import useSWR from "swr";
-import DetailTodo from "@/views/detailTodos";
 import { TodoType } from "@/types/todos.type";
+import DetailTodo from "@/views/detailTodos";
 
-// const HalamanTodo = () => {
-//   const { query } = useRouter();
-
-//   const { data, error, isLoading } = useSWR(
-//     query.todos ? `/api/todos/${query.todos}` : null,
-//     fetcher
-//   );
-
-//   if (isLoading) {
-//     return <div>Loading...</div>;
-//   }
-
-//   if (error) {
-//     return <div>Gagal mengambil data todo</div>;
-//   }
-
-//   return (
-//     <div>
-//       <DetailTodo todos={data?.data?.[0]} />
-//     </div>
-//   );
-// };
-
-// export default HalamanTodo;
-
-
-// server side rendering
-// type Props = {
-//   todos: TodoType | null;
-// };
-
-
-// ssr
-// const HalamanTodo = ({ todos }: {todos: TodoType}) => {
-//   if (!todos) {
-//     return <div>Data todo tidak ditemukan</div>;
-//   }
-
-//   return (
-//     <div>
-//       <DetailTodo todos={todos} />
-//     </div>
-//   );
-// };
-
-// export default HalamanTodo;
-
-// export async function getServerSideProps({
-//   params,
-// }: {
-//   params: { todos: string };
-// }) {
-
-//   const res = await fetch(`http://localhost:3000/api/todos/${params?.todos}`);
-
-
-//     const response = await res.json();
-
-//     return {
-//       props: {
-//         todos: response.data?.[0], // Pastikan memberikan nilai default jika data tidak tersedia
-//       },
-//     };
-// }
-
-// static site generation
-// digunakan static-site generation
-
+// Komponen tetap sama, hanya menerima props dari SSR
 const HalamanTodo = ({ todos }: { todos: TodoType }) => {
+  if (!todos) {
+    return <div>Data todo tidak ditemukan</div>;
+  }
+
   return (
     <div>
       <DetailTodo data={todos} />
@@ -82,35 +16,32 @@ const HalamanTodo = ({ todos }: { todos: TodoType }) => {
 
 export default HalamanTodo;
 
-export async function getStaticPaths() {
-  const res = await fetch("http://localhost:3000/api/todos");
-  const response = await res.json();
-  
+// Ganti getStaticProps & getStaticPaths menjadi getServerSideProps
+export async function getServerSideProps({ params }: { params: { todos: string } }) {
+  try {
+    // Mengambil data berdasarkan parameter ID yang ada di URL
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/todos/${params.todos}`);
+    
+    if (!res.ok) {
+      // Jika fetch gagal (misal 404), kembalikan notFound agar Next.js menampilkan halaman 404
+      return { notFound: true };
+    }
 
-  const paths = response.data.map((todos: TodoType) => ({
-    params: { todos: todos.id },
-  }));
+    const response: { data: TodoType } = await res.json();
 
-  console.log("Paths yang dihasilkan untuk todo:", paths);
-  
-  console.log(response.data);
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({
-  params,
-}: {
-  params: { todos: string };
-}) {
-  const res = await fetch(`http://localhost:3000/api/todos/${params.todos}`);
-  const response: { data: TodoType } = await res.json();
-
-  return {
-    props: {
-      todos: response.data,
-    },
-  };
+    return {
+      props: {
+        // Asumsi API mengembalikan objek data langsung atau array. 
+        // Sesuaikan dengan response API kamu (misal: response.data atau response.data[0])
+        todos: response.data || null,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching todo SSR:", error);
+    return {
+      props: {
+        todos: null,
+      },
+    };
+  }
 }
