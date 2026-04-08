@@ -20,10 +20,11 @@ const TampilanLogin = () => {
     //const form = event.currentTarget;
     //
     try {
+      const form = event.target as HTMLFormElement;
       const res = await signIn("credentials", {
         redirect: false,
-        email: event.target.email.value,
-        password: event.target.password.value,
+        email: form.email?.value || "",
+        password: form.password?.value || "",
         callbackUrl,
       });
 

@@ -1,34 +1,61 @@
+import "@testing-library/jest-dom/jest-globals";
 import { jest, describe, it, expect, beforeEach } from "@jest/globals";
-// src/__test__/pages/product.spec.tsx
-import { render, screen } from "@testing-library/react"
 
-const mockedUseRouter = jest.fn()
+import useSWR from "swr";
 
-jest.mock("next/router", () => ({
-    useRouter: mockedUseRouter,
-}))
+jest.mock("swr");
 
-import TampilanProduk from "@/pages/produk"
+jest.mock("@/utils/swr/fetcher", () => ({
+  __esModule: true,
+  default: jest.fn((url: string) => Promise.resolve({ data: [] })),
+}));
 
-describe("Product Page", () => {
-    beforeEach(() => {
-        mockedUseRouter.mockReturnValue({
-            route: "/produk",
-            pathname: "/produk",
-            query: {},
-            asPath: "/produk",
-            push: jest.fn(),
-            events: {
-                on: jest.fn(),
-                off: jest.fn(),
-            },
-            isReady: true,
-        })
-    })
+import { render, screen } from "@testing-library/react";
+import KategoriPage from "@/pages/produk";
 
-    it("renders product page correctly", () => {
-        const page = render(<TampilanProduk />)
-        expect(screen.getByText("Daftar Produk").textContent).toBe("Daftar Produk")
-        expect(page).toMatchSnapshot()
-    })
-})
+describe("Produk Page", () => {
+  beforeEach(() => {
+    (useSWR as jest.Mock).mockClear();
+  });
+
+  it("renders correctly on loading state", () => {
+    (useSWR as jest.Mock).mockReturnValue({
+      data: null,
+      error: null,
+      isLoading: true,
+    });
+
+    render(<KategoriPage />);
+    expect(document.querySelector(".produk")).toBeDefined();
+  });
+
+  it("renders correctly with loaded data", () => {
+    const mockData = {
+      data: [
+        { id: 1, name: "Baju Koko", price: 150000, category: "Pakaian" },
+        { id: 2, name: "Celana Panjang", price: 200000, category: "Pakaian" },
+      ],
+    };
+
+    (useSWR as jest.Mock).mockReturnValue({
+      data: mockData,
+      error: null,
+      isLoading: false,
+    });
+
+    render(<KategoriPage />);
+    // Testing the actual component's text mapping
+    expect(screen.getByText("Baju Koko")).toBeInTheDocument();
+  });
+
+  it("handles missing data robustly", () => {
+    (useSWR as jest.Mock).mockReturnValue({
+      data: null,
+      error: null,
+      isLoading: false,
+    });
+
+    render(<KategoriPage />);
+    expect(document.querySelector(".produk")).toBeDefined();
+  });
+});

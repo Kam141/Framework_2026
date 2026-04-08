@@ -21,25 +21,32 @@ const TampilanRegister = () => {
     const password = formData.get("Password") as string;
     const role = formData.get("role") as string; // ✅ ambil role
 
-    const response = await fetch("/api/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, fullname, password, role }), // ✅ kirim role
-    });
+    try {
+      const response = await fetch("/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, fullname, password, role }), // ✅ kirim role
+      });
 
-    if (response.status === 200) {
-      form.reset();
+      if (response.status === 200) {
+        setIsLoading(false);
+        console.log("calling push...");
+        push("/auth/login");
+        console.log("push called!");
+      } else {
+        setIsLoading(false);
+        setError(
+          response.status === 400
+            ? "Email already exists"
+            : "An error occurred",
+        );
+      }
+    } catch (err: any) {
+      console.error("Test Error in register submit:", err);
       setIsLoading(false);
-      push("/auth/login");
-    } else {
-      setIsLoading(false);
-      setError(
-        response.status === 400
-          ? "Email already exists"
-          : "An error occurred",
-      );
+      setError("An error occurred");
     }
   };
 
